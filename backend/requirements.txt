@@ -1,0 +1,11 @@
+flask
+flask-cors
+joblib
+scikit-learn
+pandas
+numpy
+transformers
+torch
+streamlit
+plotly
+requests
