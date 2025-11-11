@@ -1,0 +1,140 @@
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    sans-serif;
+  background-color: #f5f7fb;
+  color: #222;
+}
+
+.app {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.app-header {
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #fff;
+  padding: 1.5rem 2rem;
+}
+
+.app-header h1 {
+  margin: 0 0 0.5rem;
+}
+
+.app-main {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 1.5rem;
+  padding: 1.5rem 2rem;
+}
+
+.app-section {
+  background: #ffffff;
+  border-radius: 0.75rem;
+  padding: 1.25rem 1.5rem;
+  box-shadow: 0 6px 18px rgba(15, 23, 42, 0.05);
+}
+
+.app-section h2 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.health-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.form-row {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.form-row label {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.form-row input,
+.form-row select,
+.form-row textarea {
+  padding: 0.45rem 0.6rem;
+  border-radius: 0.4rem;
+  border: 1px solid #cbd5f5;
+  font-size: 0.9rem;
+}
+
+.form-row textarea {
+  resize: vertical;
+}
+
+.btn-primary {
+  margin-top: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  border: none;
+  border-radius: 0.5rem;
+  background: #4f46e5;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.15s ease;
+}
+
+.btn-primary:hover {
+  background: #4338ca;
+}
+
+.btn-primary:disabled {
+  background: #a5b4fc;
+  cursor: wait;
+}
+
+.result-card {
+  margin-top: 1rem;
+  padding: 0.75rem 0.9rem;
+  border-radius: 0.6rem;
+  background-color: #eef2ff;
+  border: 1px solid #c7d2fe;
+  font-size: 0.9rem;
+}
+
+.error-msg {
+  margin-top: 0.5rem;
+  color: #b91c1c;
+  font-size: 0.9rem;
+}
+
+.records-table-wrapper {
+  max-height: 60vh;
+  overflow: auto;
+}
+
+.records-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.8rem;
+}
+
+.records-table th,
+.records-table td {
+  padding: 0.4rem 0.35rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.records-table th {
+  text-align: left;
+  position: sticky;
+  top: 0;
+  background-color: #f9fafb;
+  z-index: 1;
+}
+
+.app-footer {
+  margin-top: auto;
+  padding: 0.8rem 2rem;
+  font-size: 0.75rem;
+  color: #6b7280;
+}
