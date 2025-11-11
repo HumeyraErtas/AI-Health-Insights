@@ -15,11 +15,22 @@ MODELS_DIR = BASE_DIR / "models"
 model = joblib.load(MODELS_DIR / "health_risk_model.pkl")
 scaler = joblib.load(MODELS_DIR / "scaler.pkl")
 
-# Basit İngilizce sentiment modeli (demo amaçlı)
-sentiment_pipe = pipeline(
-    "sentiment-analysis",
-    model="distilbert-base-uncased-finetuned-sst-2-english"
-)
+# Sentiment modeli lazy loading (ağ bağlantı hatası yaşanırsa kullanılmayacak)
+sentiment_pipe = None
+
+def get_sentiment_pipe():
+    global sentiment_pipe
+    if sentiment_pipe is None:
+        try:
+            sentiment_pipe = pipeline(
+                "sentiment-analysis",
+                model="distilbert-base-uncased-finetuned-sst-2-english"
+            )
+        except Exception as e:
+            print(f"Uyarı: Sentiment modeli yüklenemedi: {e}")
+            print("Sentiment analizi kapatılmıştır.")
+            return None
+    return sentiment_pipe
 
 app = Flask(__name__)
 CORS(app)
@@ -58,10 +69,15 @@ def predict():
 
     if lifestyle_text.strip():
         try:
-            result = sentiment_pipe(lifestyle_text[:512])[0]
-            lifestyle_sentiment = result["label"]
-        except Exception:
-            lifestyle_sentiment = "UNKNOWN"
+            pipe = get_sentiment_pipe()
+            if pipe is not None:
+                result = pipe(lifestyle_text[:512])[0]
+                lifestyle_sentiment = result["label"]
+            else:
+                lifestyle_sentiment = "UNAVAILABLE"
+        except Exception as e:
+            print(f"Sentiment analizi hatası: {e}")
+            lifestyle_sentiment = "ERROR"
 
     # DB'ye kaydet
     insert_record(
