@@ -44,6 +44,18 @@ def map_risk_label(proba: float) -> str:
     return "High"
 
 
+@app.route("/", methods=["GET"])
+def home():
+    return jsonify({
+        "message": "AI Health Insights API",
+        "version": "1.0",
+        "endpoints": {
+            "POST /api/health/predict": "Sağlık riski tahmini yap",
+            "GET /api/health/records": "Tüm kayıtları listele"
+        }
+    })
+
+
 @app.route("/api/health/predict", methods=["POST"])
 def predict():
     data = request.get_json(force=True)
